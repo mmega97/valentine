@@ -117,7 +117,7 @@ button {
 
 <!-- PANTALLA 1 -->
 <div id="start" class="screen active">
-  <h1>VALENTINE</h1>
+  <h1>VALENTINE A&M</h1>
   <p>Presiona cualquier tecla para comenzar…</p>
 </div>
 
@@ -140,10 +140,10 @@ button {
 <!-- PANTALLA FINAL -->
 <div id="final" class="screen">
   <div class="final-card">
-    <h2>¡Gracias Tona por aceptar! ❤️</h2>
+    <h2>¡Gracias por aceptar! ❤️</h2>
     <p>
-      Mati: Contigo quiero seguir escribiendo nuestra historia.<br><br>
-      Te amo con todo mi corazón, Tona. 💖
+      Tona: Sos la mujer de mi vida y con vos quiero seguir escribiendo nuestra historia.<br><br>
+      Te amo para siempre, Mati. 💖
     </p>
   </div>
 </div>
@@ -179,11 +179,25 @@ document.addEventListener('keydown', () => {
 
 /* Botón NO escapa */
 const noBtn = document.getElementById('no');
-noBtn.addEventListener('mouseover', () => {
-  const x = Math.random() * 200 - 100;
-  const y = Math.random() * 200 - 100;
-  noBtn.style.transform = `translate(${x}px, ${y}px)`;
+const card = document.querySelector('.card');
+
+noBtn.addEventListener('mouseenter', () => {
+  const cardRect = card.getBoundingClientRect();
+  const btnRect = noBtn.getBoundingClientRect();
+
+  const maxX = cardRect.width - btnRect.width - 20;
+  const maxY = cardRect.height - btnRect.height - 20;
+
+  const x = Math.random() * maxX;
+  const y = Math.random() * maxY;
+
+  noBtn.style.position = 'absolute';
+  noBtn.style.left = x + 'px';
+  noBtn.style.top = y + 'px';
 });
+
+noBtn.addEventListener('click', e => e.preventDefault());
+
 
 /* Botón SÍ */
 document.getElementById('yes').addEventListener('click', () => {
