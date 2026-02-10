@@ -167,9 +167,11 @@ setInterval(() => {
 }, 300);
 
 /* Tecla inicio */
-const music = document.getElementById('music');
+let music;
 document.addEventListener('keydown', () => {
+  music = document.getElementById('music');
   music.play();
+  
   start.classList.remove('active');
   dogScreen.classList.add('active');
 
