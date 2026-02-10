@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Valentine 💖</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Courier New', monospace; }
+body { overflow: hidden; }
+
+/* Pantallas */
+.screen {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.active { display: flex; }
+
+/* -------- PANTALLA 1 -------- */
+#start {
+  background: linear-gradient(#ffb6c1, #ffe4ec);
+  color: #ff2f6d;
+}
+#start h1 {
+  font-size: 70px;
+  margin-bottom: 20px;
+}
+#start p {
+  font-size: 20px;
+}
+
+/* Corazones */
+.heart {
+  position: absolute;
+  top: -20px;
+  color: red;
+  font-size: 20px;
+  animation: fall linear infinite;
+}
+@keyframes fall {
+  to { transform: translateY(110vh); }
+}
+
+/* -------- PANTALLA 2 -------- */
+#dogScreen {
+  background: #cce7ff;
+}
+#dog {
+  position: absolute;
+  bottom: 40px;
+  left: -200px;
+  font-size: 120px;
+  animation: walk 6s linear forwards;
+}
+@keyframes walk {
+  to { left: 110%; }
+}
+
+/* -------- PANTALLA 3 -------- */
+#question {
+  background: pink;
+}
+.card {
+  background: white;
+  border-radius: 20px;
+  padding: 40px;
+  text-align: center;
+  border: 6px solid hotpink;
+}
+.card h2 {
+  font-size: 30px;
+  margin-bottom: 30px;
+}
+.buttons {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+}
+button {
+  font-size: 20px;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+#yes { background: #4CAF50; color: white; }
+#no { background: #f44336; color: white; position: relative; }
+
+/* -------- PANTALLA FINAL -------- */
+#final {
+  background: linear-gradient(#6a5acd, #b19cd9);
+  color: #ff2f6d;
+}
+.final-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 40px;
+  width: 70%;
+  max-width: 600px;
+  border: 6px solid hotpink;
+}
+.final-card h2 {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+.final-card p {
+  font-size: 18px;
+  color: #333;
+}
+</style>
+</head>
+
+<body>
+
+<!-- PANTALLA 1 -->
+<div id="start" class="screen active">
+  <h1>VALENTINE</h1>
+  <p>Presiona cualquier tecla para comenzar…</p>
+</div>
+
+<!-- PANTALLA 2 -->
+<div id="dogScreen" class="screen">
+  <div id="dog">🐶</div>
+</div>
+
+<!-- PANTALLA 3 -->
+<div id="question" class="screen">
+  <div class="card">
+    <h2>Tona, ¿querés ser mi Valentine?</h2>
+    <div class="buttons">
+      <button id="yes">Sí</button>
+      <button id="no">No</button>
+    </div>
+  </div>
+</div>
+
+<!-- PANTALLA FINAL -->
+<div id="final" class="screen">
+  <div class="final-card">
+    <h2>¡Gracias Tona por aceptar! ❤️</h2>
+    <p>
+      Mati: Contigo quiero seguir escribiendo nuestra historia.<br><br>
+      Te amo con todo mi corazón, Tona. 💖
+    </p>
+  </div>
+</div>
+
+<script>
+const screens = document.querySelectorAll('.screen');
+const start = document.getElementById('start');
+const dogScreen = document.getElementById('dogScreen');
+const question = document.getElementById('question');
+const final = document.getElementById('final');
+
+/* Corazones */
+setInterval(() => {
+  const heart = document.createElement('div');
+  heart.className = 'heart';
+  heart.innerHTML = '❤️';
+  heart.style.left = Math.random() * 100 + 'vw';
+  heart.style.animationDuration = (3 + Math.random() * 5) + 's';
+  start.appendChild(heart);
+  setTimeout(() => heart.remove(), 8000);
+}, 300);
+
+/* Tecla inicio */
+document.addEventListener('keydown', () => {
+  start.classList.remove('active');
+  dogScreen.classList.add('active');
+
+  setTimeout(() => {
+    dogScreen.classList.remove('active');
+    question.classList.add('active');
+  }, 6000);
+}, { once: true });
+
+/* Botón NO escapa */
+const noBtn = document.getElementById('no');
+noBtn.addEventListener('mouseover', () => {
+  const x = Math.random() * 200 - 100;
+  const y = Math.random() * 200 - 100;
+  noBtn.style.transform = `translate(${x}px, ${y}px)`;
+});
+
+/* Botón SÍ */
+document.getElementById('yes').addEventListener('click', () => {
+  question.classList.remove('active');
+  final.classList.add('active');
+});
+</script>
+
+</body>
+</html>
