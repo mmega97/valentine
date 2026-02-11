@@ -2,9 +2,79 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Valentine 💖</title>
 <style>
+.firework {
+  position: absolute;
+  font-size: 24px;
+  animation: explode 1.5s ease-out forwards;
+}
+
+@keyframes explode {
+  0% {
+    transform: scale(0) translate(0, 0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.2) translate(var(--x), var(--y));
+    opacity: 0;
+  }
+}
+
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Courier New', monospace; }
+@media (max-width: 600px) {
+
+  #start h1 {
+    font-size: 48px;
+    text-align: center;
+  }
+
+  #start p {
+    font-size: 16px;
+    text-align: center;
+    padding: 0 20px;
+  }
+
+  #dog {
+    font-size: 90px;
+  }
+
+  .card {
+    width: 90%;
+    padding: 25px;
+  }
+
+  .card h2 {
+    font-size: 22px;
+  }
+
+  button {
+    font-size: 18px;
+    padding: 12px 22px;
+  }
+
+  .buttons {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .final-card {
+    width: 90%;
+    padding: 25px;
+  }
+
+  .final-card h2 {
+    font-size: 26px;
+    text-align: center;
+  }
+
+  .final-card p {
+    font-size: 16px;
+    text-align: center;
+  }
+}
+
 body { overflow: hidden; }
 
 /* Pantallas */
@@ -167,11 +237,15 @@ setInterval(() => {
 }, 300);
 
 /* Tecla inicio */
-let music;
-document.addEventListener('keydown', () => {
-  music = document.getElementById('music');
+let started = false;
+
+function startExperience() {
+  if (started) return;
+  started = true;
+
+  const music = document.getElementById('music');
   music.play();
-  
+
   start.classList.remove('active');
   dogScreen.classList.add('active');
 
@@ -179,7 +253,12 @@ document.addEventListener('keydown', () => {
     dogScreen.classList.remove('active');
     question.classList.add('active');
   }, 6000);
-}, { once: true });
+}
+
+document.addEventListener('keydown', startExperience);
+document.addEventListener('click', startExperience);
+document.addEventListener('touchstart', startExperience);
+
 
 /* Botón NO escapa */
 const noBtn = document.getElementById('no');
@@ -207,8 +286,34 @@ noBtn.addEventListener('click', e => e.preventDefault());
 document.getElementById('yes').addEventListener('click', () => {
   question.classList.remove('active');
   final.classList.add('active');
+
+  heartFirework();
+  setInterval(heartFirework, 2000);
 });
+
+
+function heartFirework() {
+  for (let i = 0; i < 25; i++) {
+    const heart = document.createElement('div');
+    heart.className = 'firework';
+    heart.innerHTML = '💖';
+
+    const x = (Math.random() - 0.5) * 300 + 'px';
+    const y = (Math.random() - 0.5) * 300 + 'px';
+
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.top = Math.random() * 100 + 'vh';
+    heart.style.setProperty('--x', x);
+    heart.style.setProperty('--y', y);
+
+    final.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 1500);
+  }
+}
+
 </script>
+
 
 <audio id="music" loop>
   <source src="romantic.mp3" type="audio/mpeg">
