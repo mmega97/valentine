@@ -4,76 +4,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Valentine 💖</title>
+
 <style>
 .firework {
   position: absolute;
   font-size: 24px;
   animation: explode 1.5s ease-out forwards;
+  pointer-events: none;
 }
 
 @keyframes explode {
-  0% {
-    transform: scale(0) translate(0, 0);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1.2) translate(var(--x), var(--y));
-    opacity: 0;
-  }
+  0% { transform: scale(0) translate(0, 0); opacity: 1; }
+  100% { transform: scale(1.2) translate(var(--x), var(--y)); opacity: 0; }
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Courier New', monospace; }
-@media (max-width: 600px) {
-
-  #start h1 {
-    font-size: 48px;
-    text-align: center;
-  }
-
-  #start p {
-    font-size: 16px;
-    text-align: center;
-    padding: 0 20px;
-  }
-
-  #dog {
-    font-size: 90px;
-  }
-
-  .card {
-    width: 90%;
-    padding: 25px;
-  }
-
-  .card h2 {
-    font-size: 22px;
-  }
-
-  button {
-    font-size: 18px;
-    padding: 12px 22px;
-  }
-
-  .buttons {
-    flex-direction: column;
-    gap: 15px;
-  }
-
-  .final-card {
-    width: 90%;
-    padding: 25px;
-  }
-
-  .final-card h2 {
-    font-size: 26px;
-    text-align: center;
-  }
-
-  .final-card p {
-    font-size: 16px;
-    text-align: center;
-  }
-}
 
 body { overflow: hidden; }
 
@@ -89,20 +34,29 @@ body { overflow: hidden; }
 }
 .active { display: flex; }
 
+/* -------- RESPONSIVE -------- */
+@media (max-width: 600px) {
+  #start h1 { font-size: 48px; text-align: center; }
+  #start p { font-size: 16px; text-align: center; padding: 0 20px; }
+  #dog { font-size: 90px; }
+  .card { width: 90%; padding: 25px; }
+  .card h2 { font-size: 22px; }
+  button { font-size: 18px; padding: 12px 22px; }
+  .buttons { flex-direction: column; gap: 15px; }
+  .final-card { width: 90%; padding: 25px; }
+  .final-card h2 { font-size: 26px; text-align: center; }
+  .final-card p { font-size: 16px; text-align: center; }
+}
+
 /* -------- PANTALLA 1 -------- */
 #start {
   background: linear-gradient(#ffb6c1, #ffe4ec);
   color: #ff2f6d;
 }
-#start h1 {
-  font-size: 70px;
-  margin-bottom: 20px;
-}
-#start p {
-  font-size: 20px;
-}
+#start h1 { font-size: 70px; margin-bottom: 20px; }
+#start p { font-size: 20px; }
 
-/* Corazones */
+/* Corazones cayendo */
 .heart {
   position: absolute;
   top: -20px;
@@ -110,14 +64,10 @@ body { overflow: hidden; }
   font-size: 20px;
   animation: fall linear infinite;
 }
-@keyframes fall {
-  to { transform: translateY(110vh); }
-}
+@keyframes fall { to { transform: translateY(110vh); } }
 
 /* -------- PANTALLA 2 -------- */
-#dogScreen {
-  background: #cce7ff;
-}
+#dogScreen { background: #cce7ff; }
 #dog {
   position: absolute;
   bottom: 40px;
@@ -125,14 +75,10 @@ body { overflow: hidden; }
   font-size: 120px;
   animation: walk 6s linear forwards;
 }
-@keyframes walk {
-  to { left: 110%; }
-}
+@keyframes walk { to { left: 110%; } }
 
 /* -------- PANTALLA 3 -------- */
-#question {
-  background: pink;
-}
+#question { background: pink; }
 .card {
   background: white;
   border-radius: 20px;
@@ -140,15 +86,8 @@ body { overflow: hidden; }
   text-align: center;
   border: 6px solid hotpink;
 }
-.card h2 {
-  font-size: 30px;
-  margin-bottom: 30px;
-}
-.buttons {
-  display: flex;
-  gap: 30px;
-  justify-content: center;
-}
+.card h2 { font-size: 30px; margin-bottom: 30px; }
+.buttons { display: flex; gap: 30px; justify-content: center; }
 button {
   font-size: 20px;
   padding: 15px 30px;
@@ -159,7 +98,7 @@ button {
 #yes { background: #4CAF50; color: white; }
 #no { background: #f44336; color: white; position: relative; }
 
-/* -------- PANTALLA FINAL -------- */
+/* -------- PANTALLA FINAL MENSAJE -------- */
 #final {
   background: linear-gradient(#6a5acd, #b19cd9);
   color: #ff2f6d;
@@ -172,13 +111,16 @@ button {
   max-width: 600px;
   border: 6px solid hotpink;
 }
-.final-card h2 {
-  font-size: 32px;
-  margin-bottom: 20px;
-}
-.final-card p {
-  font-size: 18px;
-  color: #333;
+.final-card h2 { font-size: 32px; margin-bottom: 20px; }
+.final-card p { font-size: 18px; color: #333; }
+
+/* -------- PANTALLA FOTO FINAL -------- */
+#finalPhoto { overflow: hidden; }
+#bgPhoto {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 </style>
 </head>
@@ -188,7 +130,7 @@ button {
 <!-- PANTALLA 1 -->
 <div id="start" class="screen active">
   <h1>VALENTINE A&M</h1>
-  <p>Presiona cualquier tecla para comenzar…</p>
+  <p>Presiona cualquier tecla o toca la pantalla…</p>
 </div>
 
 <!-- PANTALLA 2 -->
@@ -207,7 +149,7 @@ button {
   </div>
 </div>
 
-<!-- PANTALLA FINAL -->
+<!-- PANTALLA FINAL MENSAJE -->
 <div id="final" class="screen">
   <div class="final-card">
     <h2>¡Gracias por aceptar! ❤️</h2>
@@ -218,14 +160,19 @@ button {
   </div>
 </div>
 
+<!-- PANTALLA FINAL FOTO -->
+<div id="finalPhoto" class="screen">
+  <img id="bgPhoto" src="foto.jpg" alt="Nuestra foto">
+</div>
+
 <script>
-const screens = document.querySelectorAll('.screen');
 const start = document.getElementById('start');
 const dogScreen = document.getElementById('dogScreen');
 const question = document.getElementById('question');
 const final = document.getElementById('final');
+const finalPhoto = document.getElementById('finalPhoto');
 
-/* Corazones */
+/* Corazones cayendo */
 setInterval(() => {
   const heart = document.createElement('div');
   heart.className = 'heart';
@@ -236,15 +183,14 @@ setInterval(() => {
   setTimeout(() => heart.remove(), 8000);
 }, 300);
 
-/* Tecla inicio */
+/* Inicio universal (PC + celular) */
 let started = false;
-
 function startExperience() {
   if (started) return;
   started = true;
 
   const music = document.getElementById('music');
-  music.play();
+  if (music) music.play().catch(()=>{});
 
   start.classList.remove('active');
   dogScreen.classList.add('active');
@@ -254,11 +200,8 @@ function startExperience() {
     question.classList.add('active');
   }, 6000);
 }
-
-document.addEventListener('keydown', startExperience);
-document.addEventListener('click', startExperience);
-document.addEventListener('touchstart', startExperience);
-
+window.addEventListener('pointerdown', startExperience);
+window.addEventListener('keydown', startExperience);
 
 /* Botón NO escapa */
 const noBtn = document.getElementById('no');
@@ -271,53 +214,53 @@ noBtn.addEventListener('mouseenter', () => {
   const maxX = cardRect.width - btnRect.width - 20;
   const maxY = cardRect.height - btnRect.height - 20;
 
-  const x = Math.random() * maxX;
-  const y = Math.random() * maxY;
-
   noBtn.style.position = 'absolute';
-  noBtn.style.left = x + 'px';
-  noBtn.style.top = y + 'px';
+  noBtn.style.left = Math.random() * maxX + 'px';
+  noBtn.style.top = Math.random() * maxY + 'px';
 });
-
 noBtn.addEventListener('click', e => e.preventDefault());
-
 
 /* Botón SÍ */
 document.getElementById('yes').addEventListener('click', () => {
   question.classList.remove('active');
   final.classList.add('active');
 
-  heartFirework();
-  setInterval(heartFirework, 2000);
+  heartFirework(final);
+
+  setTimeout(() => {
+    final.classList.remove('active');
+    finalPhoto.classList.add('active');
+
+    heartFirework(finalPhoto);
+    setInterval(() => heartFirework(finalPhoto), 2000);
+  }, 5000);
 });
 
-
-function heartFirework() {
+/* Fuegos artificiales */
+function heartFirework(container) {
   for (let i = 0; i < 25; i++) {
     const heart = document.createElement('div');
     heart.className = 'firework';
     heart.innerHTML = '💖';
 
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.top = Math.random() * 100 + 'vh';
+
     const x = (Math.random() - 0.5) * 300 + 'px';
     const y = (Math.random() - 0.5) * 300 + 'px';
 
-    heart.style.left = Math.random() * 100 + 'vw';
-    heart.style.top = Math.random() * 100 + 'vh';
     heart.style.setProperty('--x', x);
     heart.style.setProperty('--y', y);
 
-    final.appendChild(heart);
-
+    container.appendChild(heart);
     setTimeout(() => heart.remove(), 1500);
   }
 }
-
 </script>
-
 
 <audio id="music" loop>
   <source src="romantic.mp3" type="audio/mpeg">
 </audio>
-  
+
 </body>
 </html>
